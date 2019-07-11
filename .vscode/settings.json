@@ -1,0 +1,57 @@
+{
+    // my defines for tasks
+    "st_flash_exe" : "_sandbox/stlink/bin/st-flash.exe",
+    "cmake_exe" : "_sandbox/cmake/bin/cmake.exe",
+    // "make_exe" : "_sandbox/MinGW/bin/mingw32-make.exe",
+    "make_exe" : "_sandbox/ninja/ninja.exe",
+    "ninja_dir" : "_sandbox/ninja",
+    "build_folder" : "_build",
+    "gcc" : "_sandbox\\gcc\\bin\\arm-none-eabi-",
+
+    // settings
+    "files.exclude": {
+        // "**/.git": true,
+        // "**/.svn": true,
+        // "**/.hg": true,
+        // "**/CVS": true,
+        // "**/.DS_Store": true,
+        "_*": true
+    },
+    "cortex-debug.armToolchainPath": "${workspaceRoot}\\_sandbox\\gcc\\bin\\",
+    "cortex-debug.stutilPath": "${workspaceRoot}\\_sandbox\\stlink\\bin\\st-util.exe",
+    "C_Cpp.formatting" : "Disabled",
+    "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 200,
+    "files.associations": {
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "limits": "cpp",
+        "*.tcc": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "memory": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
+    },
+    
+}

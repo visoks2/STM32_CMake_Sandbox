@@ -1,0 +1,201 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    // http://patorjk.com/software/taag/#p=display&c=c%2B%2B&f=Banner3&t=h%20i ascii heaven
+    "version": "2.0.0",
+    "tasks": [
+        //  ########     ##     ##    ####    ##          ########  
+        //  ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ########     ##     ##     ##     ##          ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ########      #######     ####    ########    ########  
+        {
+            "label": "build",
+            "type": "shell",
+            "command": [
+                "mkdir '${workspaceFolder}/${config:build_folder}' -ErrorAction Ignore;",
+                "cd '${workspaceFolder}/${config:build_folder}';",
+                "${workspaceFolder}/${config:cmake_exe} -DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/stm32f1xx_gcc_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug .. ;",
+                "${workspaceFolder}/${config:make_exe};",
+            ],
+            "options": {
+                "env": {
+                    "PATH": "${env:PATH};${workspaceFolder}/${config:ninja_dir};",
+                    // "CC" : "${workspaceFolder}\\${config:gcc}gcc.exe",
+                    // "CXX" : "${workspaceFolder}\\${config:gcc}g++.exe",
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //   ######     ##          ########       ###       ########  
+        //  ##    ##    ##          ##            ## ##      ##     ## 
+        //  ##          ##          ##           ##   ##     ##     ## 
+        //  ##          ##          ######      ##     ##    ########  
+        //  ##          ##          ##          #########    ##   ##   
+        //  ##    ##    ##          ##          ##     ##    ##    ##  
+        //   ######     ########    ########    ##     ##    ##     ## 
+        {
+            "label": "clear",
+            "type": "shell",
+            "command": [
+                "remove-item '${workspaceFolder}/${config:build_folder}' -recurse -force -ErrorAction Ignore;",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //  ########     ########    ########     ##     ##    ####    ##          ########  
+        //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ########     ######      ########     ##     ##     ##     ##          ##     ## 
+        //  ##   ##      ##          ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ##    ##     ##          ##     ##    ##     ##     ##     ##          ##     ## 
+        //  ##     ##    ########    ########      #######     ####    ########    ########  
+        {
+            "label": "rebuild",
+            "type": "shell",
+            "command": [
+            ],
+            "dependsOn" : [
+                "clear",
+                "build"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //  ########    ##             ###        ######     ##     ## 
+        //  ##          ##            ## ##      ##    ##    ##     ## 
+        //  ##          ##           ##   ##     ##          ##     ## 
+        //  ######      ##          ##     ##     ######     ######### 
+        //  ##          ##          #########          ##    ##     ## 
+        //  ##          ##          ##     ##    ##    ##    ##     ## 
+        //  ##          ########    ##     ##     ######     ##     ## 
+        {
+            "label": "flash",
+            "type": "shell",
+            "command": [
+                "${config:st_flash_exe} write '${workspaceFolder}/${config:build_folder}/Core/TestCpp.bin' 0x08000000 ;",
+                "${config:st_flash_exe} reset",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //  ########     ##     ##    ####    ##          ########             ####             ########    ##             ###        ######     ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ##           ##  ##            ##          ##            ## ##      ##    ##    ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ##            ####             ##          ##           ##   ##     ##          ##     ## 
+        //  ########     ##     ##     ##     ##          ##     ##           ####              ######      ##          ##     ##     ######     ######### 
+        //  ##     ##    ##     ##     ##     ##          ##     ##          ##  ## ##          ##          ##          #########          ##    ##     ## 
+        //  ##     ##    ##     ##     ##     ##          ##     ##          ##   ##            ##          ##          ##     ##    ##    ##    ##     ## 
+        //  ########      #######     ####    ########    ########            ####  ##          ##          ########    ##     ##     ######     ##     ## 
+        {
+            "label": "build & flash",
+            "type": "shell",
+            "dependsOn" : [
+                "build",
+                "flash"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //  ########     ########    ########     ##     ##    ####    ##          ########             ####             ########    ##             ###        ######     ##     ## 
+        //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ##           ##  ##            ##          ##            ## ##      ##    ##    ##     ## 
+        //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ##            ####             ##          ##           ##   ##     ##          ##     ## 
+        //  ########     ######      ########     ##     ##     ##     ##          ##     ##           ####              ######      ##          ##     ##     ######     ######### 
+        //  ##   ##      ##          ##     ##    ##     ##     ##     ##          ##     ##          ##  ## ##          ##          ##          #########          ##    ##     ## 
+        //  ##    ##     ##          ##     ##    ##     ##     ##     ##          ##     ##          ##   ##            ##          ##          ##     ##    ##    ##    ##     ## 
+        //  ##     ##    ########    ########      #######     ####    ########    ########            ####  ##          ##          ########    ##     ##     ######     ##     ## 
+        {
+            "label": "rebuild & flash",
+            "type": "shell",
+            "dependsOn" : [
+                "rebuild",
+                "flash"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        //  ########     ########     ######     ########    ########          ########     ########    ##     ##    ####     ######     ######## 
+        //  ##     ##    ##          ##    ##    ##             ##             ##     ##    ##          ##     ##     ##     ##    ##    ##       
+        //  ##     ##    ##          ##          ##             ##             ##     ##    ##          ##     ##     ##     ##          ##       
+        //  ########     ######       ######     ######         ##             ##     ##    ######      ##     ##     ##     ##          ######   
+        //  ##   ##      ##                ##    ##             ##             ##     ##    ##           ##   ##      ##     ##          ##       
+        //  ##    ##     ##          ##    ##    ##             ##             ##     ##    ##            ## ##       ##     ##    ##    ##       
+        //  ##     ##    ########     ######     ########       ##             ########     ########       ###       ####     ######     ######## 
+        {
+            "label": "reset device",
+            "type": "shell",
+            "command": "${config:st_flash_exe} reset",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ],
+
+}
