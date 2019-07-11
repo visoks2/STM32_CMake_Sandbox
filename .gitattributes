@@ -1,8 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-* linguist-vendored
-*.html linguist-vendored=false
-*.rst linguist-vendored=false
-*.py linguist-vendored=false
-*.sh linguist-vendored=false
+_sandbox/* linguist-vendored
