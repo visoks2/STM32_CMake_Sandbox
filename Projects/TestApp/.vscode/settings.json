@@ -1,11 +1,24 @@
 {
     // my defines for tasks
-    "st_flash_exe" : "../../Sandbox/stlink/bin/st-flash.exe",
-    "cmake_exe" : "../../Sandbox/cmake/bin/cmake.exe",
-    // "make_exe" : "Sandbox/MinGW/bin/mingw32-make.exe",
-    "make_exe" : "../../Sandbox/ninja/ninja.exe",
-    "ninja_dir" : "../../Sandbox/ninja",
-    "build_folder" : "_build",
+    "loader" : {
+        "dir":"../../Sandbox/stlink/bin/",
+        "exe":"st-flash.exe",
+        "bin":"_build/Core/TestCpp.bin",
+    },
+    "cmake" : {
+        "dir":"../../Sandbox/cmake/bin/",
+        "exe":"cmake.exe",
+    },
+    "make" : {
+        "dir":"../../Sandbox/ninja/",
+        "exe":"ninja.exe"
+    },
+    "build" : {
+        "dir":"_build",
+        "type": "Debug",
+        "toolchain":"cmake/stm32f1xx_gcc_toolchain.cmake",
+    },
+    
     "gcc" : "../../Sandbox/gcc/bin/arm-none-eabi-",
 
     // settings

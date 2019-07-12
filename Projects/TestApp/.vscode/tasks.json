@@ -15,14 +15,17 @@
             "label": "build",
             "type": "shell",
             "command": [
-                "mkdir '${workspaceFolder}/${config:build_folder}' -ErrorAction Ignore;",
-                "cd '${workspaceFolder}/${config:build_folder}';",
-                "${workspaceFolder}/${config:cmake_exe} -DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/stm32f1xx_gcc_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug .. ;",
-                "${workspaceFolder}/${config:make_exe};",
+                "mkdir '${workspaceFolder}/${config:build.dir}' -ErrorAction Ignore;",
+                // "cd '${workspaceFolder}/${config:build.dir}';",
+                // "${workspaceFolder}/${config:cmake_exe} -DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/stm32f1xx_gcc_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug ; ",
+                "cd '${workspaceFolder}/${config:cmake.dir}';",
+                "./${config:cmake.exe} -DCMAKE_TOOLCHAIN_FILE='${workspaceFolder}/${config:build.toolchain}' -GNinja -DCMAKE_BUILD_TYPE=${config:build.type} -S'${workspaceFolder}' -B'${workspaceFolder}/${config:build.dir}' ; ",
+                "cd '${workspaceFolder}/${config:make.dir}';",
+                "./${config:make.exe} -C '${workspaceFolder}/${config:build.dir}'",
             ],
             "options": {
                 "env": {
-                    "PATH": "${env:PATH};${workspaceFolder}/${config:ninja_dir};",
+                    "PATH": "${env:PATH};${workspaceFolder}/${config:make.dir};", // to solve "CMake was unable to find a build program corresponding to "Ninja""
                     // "CC" : "${workspaceFolder}\\${config:gcc}gcc.exe",
                     // "CXX" : "${workspaceFolder}\\${config:gcc}g++.exe",
                 }
@@ -51,7 +54,7 @@
             "label": "clear",
             "type": "shell",
             "command": [
-                "remove-item '${workspaceFolder}/${config:build_folder}' -recurse -force -ErrorAction Ignore;",
+                "remove-item '${workspaceFolder}/${config:build.dir}' -recurse -force -ErrorAction Ignore;",
             ],
             "group": {
                 "kind": "build",
@@ -107,8 +110,9 @@
             "label": "flash",
             "type": "shell",
             "command": [
-                "${config:st_flash_exe} write '${workspaceFolder}/${config:build_folder}/Core/TestCpp.bin' 0x08000000 ;",
-                "${config:st_flash_exe} reset",
+                "cd '${workspaceFolder}/${config:loader.dir}';",
+                "./${config:loader.exe} write '${workspaceFolder}/${config:loader.bin}' 0x08000000 ;",
+                "./${config:loader.exe} reset",
             ],
             "group": {
                 "kind": "build",
@@ -189,7 +193,10 @@
         {
             "label": "reset device",
             "type": "shell",
-            "command": "${config:st_flash_exe} reset",
+            "command": [
+                "cd '${workspaceFolder}/${config:loader.dir}';",
+                "./${config:loader.exe} reset",
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
