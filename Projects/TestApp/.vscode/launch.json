@@ -7,7 +7,7 @@
         {
             "name": "Cortex Debug",
             "cwd": "${workspaceRoot}",
-            "executable": "${config:build_folder}/Core/TestCpp.elf",
+            "executable": "${config:loader.elf}",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "stutil"
