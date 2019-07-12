@@ -1,12 +1,12 @@
 {
     // my defines for tasks
-    "st_flash_exe" : "_sandbox/stlink/bin/st-flash.exe",
-    "cmake_exe" : "_sandbox/cmake/bin/cmake.exe",
-    // "make_exe" : "_sandbox/MinGW/bin/mingw32-make.exe",
-    "make_exe" : "_sandbox/ninja/ninja.exe",
-    "ninja_dir" : "_sandbox/ninja",
+    "st_flash_exe" : "../../Sandbox/stlink/bin/st-flash.exe",
+    "cmake_exe" : "../../Sandbox/cmake/bin/cmake.exe",
+    // "make_exe" : "Sandbox/MinGW/bin/mingw32-make.exe",
+    "make_exe" : "../../Sandbox/ninja/ninja.exe",
+    "ninja_dir" : "../../Sandbox/ninja",
     "build_folder" : "_build",
-    "gcc" : "_sandbox\\gcc\\bin\\arm-none-eabi-",
+    "gcc" : "../../Sandbox/gcc/bin/arm-none-eabi-",
 
     // settings
     "files.exclude": {
@@ -15,12 +15,14 @@
         // "**/.hg": true,
         // "**/CVS": true,
         // "**/.DS_Store": true,
-        "_*": true
+        // "_*": true
     },
-    "cortex-debug.armToolchainPath": "${workspaceRoot}\\_sandbox\\gcc\\bin\\",
-    "cortex-debug.stutilPath": "${workspaceRoot}\\_sandbox\\stlink\\bin\\st-util.exe",
+
+    
+    "cortex-debug.armToolchainPath": "${workspaceRoot}/Sandbox/gcc/bin/",
+    "cortex-debug.stutilPath": "${workspaceRoot}/Sandbox/stlink/bin/st-util.exe",
     "C_Cpp.formatting" : "Disabled",
-    "editor.minimap.enabled": false,
+    // "editor.minimap.enabled": false,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 200,
     "files.associations": {

@@ -6,11 +6,12 @@ How to use it (windows):
   1) get visual studio code (https://code.visualstudio.com/) and install these extensions:
         https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools
         https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug
-  2) build it! open vscode and run task (ctrl+shift+b) or Terminal->Run Task...->(choose any from popup)
-      tasks are defined in ./.vscode/tasks.json
+  2) open vscode (from ./Projects/TestApp)
+  2) build it! run task (ctrl+shift+b) or Terminal->Run Task...->(choose any from popup)
+      tasks are defined in ./Projects/TestApp/.vscode/tasks.json
   3) install st-link/v2 drivers from:
         https://www.st.com/en/development-tools/stsw-link009.html or
-        ./_sandbox/_drivers/
+        ./Sandbox/_drivers/
   4) connect hardware!
   5) flash it! (same as #2)
   6) debug it! press F5 or Debug->Start Debugging

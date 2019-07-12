@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-_sandbox/* linguist-vendored
+Sandbox/* linguist-vendored

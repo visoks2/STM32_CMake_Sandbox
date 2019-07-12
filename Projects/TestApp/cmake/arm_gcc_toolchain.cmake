@@ -23,7 +23,7 @@ set(triplet arm-none-eabi)
 find_path(CMAKE_SYSROOT include/stdint.h
     PATH_SUFFIXES ${triplet}
     HINTS
-    ${PROJECT_SOURCE_DIR}\\_sandbox\\gcc
+    ${PROJECT_SOURCE_DIR}\\..\\..\\Sandbox\\gcc
     "[HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\ARM\\GNU Tools for ARM Embedded Processors;InstallFolder]"
     /opt
     /usr/local
