@@ -3,8 +3,8 @@
     "loader" : {
         "dir":"../../Sandbox/stlink/bin/",
         "exe":"st-flash.exe",
-        "bin":"_build/Core/TestCpp.bin",
-        "elf":"_build/Core/TestCpp.elf",
+        "bin":"build/Core/TestCpp.bin",
+        "elf":"build/Core/TestCpp.elf",
     },
     "cmake" : {
         "dir":"../../Sandbox/cmake/bin/",
@@ -15,7 +15,7 @@
         "exe":"ninja.exe"
     },
     "build" : {
-        "dir":"_build",
+        "dir":"build",
         "type": "Debug",
         "toolchain":"cmake/stm32f1xx_gcc_toolchain.cmake",
     },
@@ -33,6 +33,9 @@
     },
 
     
+    "cmake.cmakePath": "${workspaceRoot}/../../Sandbox/cmake/bin/cmake.exe",
+    "cmake.generator": "Ninja",
+    "cmake.configureSettings": { "CMAKE_MAKE_PROGRAM": "${workspaceRoot}/../../Sandbox/ninja/ninja.exe" },
     "cortex-debug.armToolchainPath": "${workspaceRoot}/../../Sandbox/gcc/bin/",
     "cortex-debug.stutilPath": "${workspaceRoot}/../../Sandbox/stlink/bin/st-util.exe",
     "C_Cpp.formatting" : "Disabled",
