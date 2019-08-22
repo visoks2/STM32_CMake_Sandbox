@@ -1,0 +1,82 @@
+{
+    // my defines for tasks
+    "loader" : {
+        "dir":"../../Sandbox/stlink/bin/",
+        "exe":"st-flash.exe",
+        "bin":"build/Core/cnc.bin",
+        "elf":"build/Core/cnc.elf",
+    },
+    "cmake" : {
+        "dir":"../../Sandbox/cmake/bin/",
+        "exe":"cmake.exe",
+    },
+    "make" : {
+        "dir":"../../Sandbox/ninja/",
+        "exe":"ninja.exe"
+    },
+    "build" : {
+        "dir":"build",
+        "type": "Debug",
+        "toolchain":"cmake/stm32f1xx_gcc_toolchain.cmake",
+    },
+    
+    "gcc_bin" : "${workspaceRoot}/../../Sandbox/gcc/bin/",
+    "gcc" : "../../Sandbox/gcc/bin/arm-none-eabi-",
+
+    // settings
+    "files.exclude": {
+        // "**/.git": true,
+        // "**/.svn": true,
+        // "**/.hg": true,
+        // "**/CVS": true,
+        // "**/.DS_Store": true,
+        // "_*": true
+    },
+
+    "cmake.cmakePath": "${workspaceRoot}/../../Sandbox/cmake/bin/cmake.exe",
+    "cmake.generator": "Ninja",
+    "cmake.configureSettings": { "CMAKE_MAKE_PROGRAM": "${workspaceRoot}/../../Sandbox/ninja/ninja.exe" },
+    "cortex-debug.armToolchainPath": "${workspaceRoot}/../../Sandbox/gcc/bin/",
+    "cortex-debug.stutilPath": "${workspaceRoot}/../../Sandbox/stlink/bin/st-util.exe",
+    "C_Cpp.formatting" : "Disabled",
+    // "editor.minimap.enabled": false,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 200,
+    "files.associations": {
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "limits": "cpp",
+        "*.tcc": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "exception": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "memory": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "fstream": "cpp",
+        "functional": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
+    },
+    
+}
