@@ -14,21 +14,32 @@
         {
             "label": "build",
             "type": "shell",
-            "command": [
-                "mkdir '${workspaceFolder}/${config:build.dir}' -ErrorAction Ignore;",
-                // "cd '${workspaceFolder}/${config:build.dir}';",
-                // "${workspaceFolder}/${config:cmake_exe} -DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/stm32f1xx_gcc_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug ; ",
-                "cd '${workspaceFolder}/${config:cmake.dir}';",
-                "./${config:cmake.exe} -DCMAKE_TOOLCHAIN_FILE='${workspaceFolder}/${config:build.toolchain}' -GNinja -DCMAKE_BUILD_TYPE=${config:build.type} -S'${workspaceFolder}' -B'${workspaceFolder}/${config:build.dir}' ; ",
-                "cd '${workspaceFolder}/${config:make.dir}';",
-                "./${config:make.exe} -C '${workspaceFolder}/${config:build.dir}'",
-            ],
-            "options": {
-                "env": {
-                    "PATH": "${env:PATH};${workspaceFolder}/${config:make.dir};", // to solve "CMake was unable to find a build program corresponding to "Ninja""
-                    // "CC" : "${workspaceFolder}\\${config:gcc}gcc.exe",
-                    // "CXX" : "${workspaceFolder}\\${config:gcc}g++.exe",
-                }
+            "windows": {
+                "command": [
+                    "mkdir '${workspaceFolder}/${config:build.dir}' -ErrorAction Ignore;",
+                    // "cd '${workspaceFolder}/${config:build.dir}';",
+                    // "${workspaceFolder}/${config:cmake_exe} -DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cmake/stm32f1xx_gcc_toolchain.cmake -GNinja -DCMAKE_BUILD_TYPE=Debug ; ",
+                    "cd '${workspaceFolder}/${config:cmake.dir}';",
+                    "./${config:cmake.exe} -DCMAKE_TOOLCHAIN_FILE='${workspaceFolder}/${config:build.toolchain}' -GNinja -DCMAKE_BUILD_TYPE=${config:build.type} -S'${workspaceFolder}' -B'${workspaceFolder}/${config:build.dir}' ; ",
+                    "cd '${workspaceFolder}/${config:make.dir}';",
+                    "./${config:make.exe} -C '${workspaceFolder}/${config:build.dir}'",
+                ],
+                "options": {
+                    "env": {
+                        "PATH": "${env:PATH};${workspaceFolder}/${config:make.dir};", // to solve "CMake was unable to find a build program corresponding to "Ninja""
+                        // "CC" : "${workspaceFolder}\\${config:gcc}gcc.exe",
+                        // "CXX" : "${workspaceFolder}\\${config:gcc}g++.exe",
+                    }
+                },
+            },
+            "linux": {
+                "command": [
+                    "rm -r '${workspaceFolder}/${config:build.dir}' ;",
+                    "mkdir '${workspaceFolder}/${config:build.dir}' ;",
+                    "cd '${workspaceFolder}/${config:build.dir}';",
+                    "cmake -DCMAKE_TOOLCHAIN_FILE='${workspaceFolder}/${config:build.toolchain}' ..;",
+                    "make",
+                ]
             },
             "group": {
                 "kind": "build",
@@ -41,7 +52,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //   ######     ##          ########       ###       ########  
         //  ##    ##    ##          ##            ## ##      ##     ## 
@@ -67,7 +80,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //  ########     ########    ########     ##     ##    ####    ##          ########  
         //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ## 
@@ -79,9 +94,8 @@
         {
             "label": "rebuild",
             "type": "shell",
-            "command": [
-            ],
-            "dependsOn" : [
+            "command": [],
+            "dependsOn": [
                 "clear",
                 "build"
             ],
@@ -97,7 +111,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //  ########    ##             ###        ######     ##     ## 
         //  ##          ##            ## ##      ##    ##    ##     ## 
@@ -109,11 +125,20 @@
         {
             "label": "flash",
             "type": "shell",
-            "command": [
-                "cd '${workspaceFolder}/${config:loader.dir}';",
-                "./${config:loader.exe} write '${workspaceFolder}/${config:loader.bin}' 0x08000000 ;",
-                "./${config:loader.exe} reset",
-            ],
+            "windows": {
+                "command": [
+                    "cd '${workspaceFolder}/${config:loader.dir}';",
+                    "./${config:loader.exe} write '${workspaceFolder}/${config:loader.bin}' 0x08000000 ;",
+                    "./${config:loader.exe} reset",
+                ],
+            },
+            "linux": {
+                "command": [
+                    "cd '${workspaceFolder}/${config:loader-linux.dir}';",
+                    "./${config:loader-linux.exe} write '${workspaceFolder}/${config:loader-linux.bin}' 0x08000000 ;",
+                    "./${config:loader-linux.exe} reset",
+                ],
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -125,7 +150,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //  ########     ##     ##    ####    ##          ########             ####             ########    ##             ###        ######     ##     ## 
         //  ##     ##    ##     ##     ##     ##          ##     ##           ##  ##            ##          ##            ## ##      ##    ##    ##     ## 
@@ -137,7 +164,7 @@
         {
             "label": "build & flash",
             "type": "shell",
-            "dependsOn" : [
+            "dependsOn": [
                 "build",
                 "flash"
             ],
@@ -153,7 +180,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //  ########     ########    ########     ##     ##    ####    ##          ########             ####             ########    ##             ###        ######     ##     ## 
         //  ##     ##    ##          ##     ##    ##     ##     ##     ##          ##     ##           ##  ##            ##          ##            ## ##      ##    ##    ##     ## 
@@ -165,7 +194,7 @@
         {
             "label": "rebuild & flash",
             "type": "shell",
-            "dependsOn" : [
+            "dependsOn": [
                 "rebuild",
                 "flash"
             ],
@@ -181,7 +210,9 @@
                 "showReuseMessage": false,
                 "clear": true,
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         },
         //  ########     ########     ######     ########    ########          ########     ########    ##     ##    ####     ######     ######## 
         //  ##     ##    ##          ##    ##    ##             ##             ##     ##    ##          ##     ##     ##     ##    ##    ##       
@@ -193,16 +224,25 @@
         {
             "label": "reset device",
             "type": "shell",
-            "command": [
-                "cd '${workspaceFolder}/${config:loader.dir}';",
-                "./${config:loader.exe} reset",
-            ],
+            "windows": {
+                "command": [
+                    "cd '${workspaceFolder}/${config:loader.dir}';",
+                    "./${config:loader.exe} reset",
+                ],
+            },
+            "linux": {
+                "command": [
+                    "cd '${workspaceFolder}/${config:loader-linux.dir}';",
+                    "./${config:loader-linux.exe} reset",
+                ],
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": ["$gcc"]
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ],
-
 }

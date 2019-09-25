@@ -6,6 +6,12 @@
         "bin":"build/Core/TestCpp.bin",
         "elf":"build/Core/TestCpp.elf",
     },
+    "loader-linux" : {
+        "dir":"../../Sandbox/stlink-linux/",
+        "exe":"st-flash",
+        "bin":"build/Core/TestCpp.bin",
+        "elf":"build/Core/TestCpp.elf",
+    },
     "cmake" : {
         "dir":"../../Sandbox/cmake/bin/",
         "exe":"cmake.exe",
@@ -19,7 +25,6 @@
         "type": "Debug",
         "toolchain":"cmake/stm32f1xx_gcc_toolchain.cmake",
     },
-    
     "gcc" : "../../Sandbox/gcc/bin/arm-none-eabi-",
 
     // settings
