@@ -60,6 +60,24 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define R_EN_L_Pin GPIO_PIN_5
+#define R_EN_L_GPIO_Port GPIOA
+#define IS_L_Pin GPIO_PIN_6
+#define IS_L_GPIO_Port GPIOA
+#define L_EN_L_Pin GPIO_PIN_7
+#define L_EN_L_GPIO_Port GPIOA
+#define SHAFT_Pin GPIO_PIN_1
+#define SHAFT_GPIO_Port GPIOB
+#define PWM_L_Pin GPIO_PIN_4
+#define PWM_L_GPIO_Port GPIOB
+#define PWM_R_Pin GPIO_PIN_5
+#define PWM_R_GPIO_Port GPIOB
+#define R_EN_R_Pin GPIO_PIN_6
+#define R_EN_R_GPIO_Port GPIOB
+#define IS_R_Pin GPIO_PIN_7
+#define IS_R_GPIO_Port GPIOB
+#define L_EN_R_Pin GPIO_PIN_8
+#define L_EN_R_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
