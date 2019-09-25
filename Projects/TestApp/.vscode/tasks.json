@@ -34,8 +34,8 @@
             },
             "linux": {
                 "command": [
-                    "rm -r '${workspaceFolder}/${config:build.dir}' ;",
-                    "mkdir '${workspaceFolder}/${config:build.dir}' ;",
+                    // "rm -r '${workspaceFolder}/${config:build.dir}' ;",
+                    "mkdir -p '${workspaceFolder}/${config:build.dir}' ;",
                     "cd '${workspaceFolder}/${config:build.dir}';",
                     "cmake -DCMAKE_TOOLCHAIN_FILE='${workspaceFolder}/${config:build.toolchain}' ..;",
                     "make",
@@ -66,9 +66,16 @@
         {
             "label": "clear",
             "type": "shell",
-            "command": [
-                "remove-item '${workspaceFolder}/${config:build.dir}' -recurse -force -ErrorAction Ignore;",
-            ],
+            "windows": {
+                "command": [
+                    "remove-item '${workspaceFolder}/${config:build.dir}' -recurse -force -ErrorAction Ignore;",
+                ],
+            },
+            "linux": {
+                "command": [
+                    "rm -r '${workspaceFolder}/${config:build.dir}';",
+                ],
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true,
